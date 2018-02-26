@@ -1,12 +1,23 @@
 <template>
-  <div id="app">
-     <router-view/>
-  </div>
+ <div id="app">
+  <v-app>
+    <page-header></page-header>
+    <v-content>    
+      <v-container fluid fill-height>        
+        <router-view/>
+      </v-container>
+    </v-content>      
+  </v-app>
+</div>
 </template>
 
 <script>
+import pageHeader from '@/components/Header.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components:{
+    pageHeader
+  }
 }
 </script>
 
@@ -17,6 +28,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  
 }
+
 </style>
