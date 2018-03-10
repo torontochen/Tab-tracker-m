@@ -14,6 +14,7 @@
 <script>
 import pageHeader from '@/components/Header.vue'
 export default {
+  
   name: 'App',
   components:{
     pageHeader

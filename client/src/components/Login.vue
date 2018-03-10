@@ -1,10 +1,7 @@
-<template>
+<template >
 <v-layout  align-center>
-  <v-flex xs6 offset-xs3 class="mt-0 pt-0">
-    <div class="white elevation-8">
-            <v-toolbar flat dense class="cyan" dark>
-              <v-toolbar-title>Log In</v-toolbar-title>
-            </v-toolbar>
+  <v-flex xs6 offset-xs3 class="mt-0 pt-0" v-if="!$store.state.isUserLoggedIn" >
+    <panel title="Log In">
             <div class="pl-4 pr-4 pt-2 pb-2">
                 <v-text-field                  
                   label="Email:"                                   
@@ -14,23 +11,23 @@
                   label="Password:"
                   type="password"                  
                   v-model="password"
-                  
-                ></v-text-field                
+                ></v-text-field>                
               <br>              
-              <div v-if="isError==true" class="error" v-html="error"></div>
+              <div v-if="isError==true" class="danger-alert" v-html="error"></div>
               <v-btn 
               @click="login"
               class="cyan"
               dark
               >Log In</v-btn>
             </div>
-    </div>
+    </panel>
   </v-flex>
 </v-layout> 
 </template>
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
+
 export default {
   data () {
     return {
@@ -56,6 +53,9 @@ export default {
      this.isError = false
      this.$store.dispatch('setToken',response.data.token)
      this.$store.dispatch('setUser',response.data.user)
+     this.$router.push({
+       name:'songs'
+     })
      //console.log(this.isError)
      } catch(error){
        this.error = error.response.data.error
@@ -65,6 +65,9 @@ export default {
      
     }
   },
+  components:{
+  
+  }
 
   // mounted(){
   //   setTimeout(function(){
@@ -76,7 +79,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .error {
+  .danger-alert{
     color:red;
   }
 
